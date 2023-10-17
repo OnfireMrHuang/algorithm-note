@@ -120,6 +120,6 @@ $$
 
 ## 参考资料
 
-[labuladong的算法小抄](https://github.com/labuladong/fucking-algorithm)
-[Hello算法](https://github.com/krahets/hello-algo)
-[算法导论](https://jingyuexing.github.io/Ebook/Algorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA.pdf)
+1. [labuladong的算法小抄](https://github.com/labuladong/fucking-algorithm)
+2. [Hello算法](https://github.com/krahets/hello-algo)
+3. [算法导论](https://jingyuexing.github.io/Ebook/Algorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA.pdf)
