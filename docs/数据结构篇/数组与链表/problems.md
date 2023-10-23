@@ -10,9 +10,17 @@
 [java版本](../../../codes/java/1.两数之和.java)
 [golang版本](../../../codes/golang/1.两数之和.go)
 [python版本](../../../codes/python/1.两数之和.py)
-[mojo版本](../../../codes/mojo/1.两数之和.mojo)
 
 ## 合并区间
+
+**题目描述**: 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。
+
+**题解**: 首先可以对给定的区间数组intervals先排序(按照start), 重叠的区间肯定选start最小的，而end选最大的，所以我们只需要遍历区间数组，每个区间和上一个区间对比是否重叠，如果重叠则更新end, 不重叠则将上一个区间加入结果数组中。
+
+[rust版本](../../../codes/rust/56.合并区间.rs)
+[java版本](../../../codes/java/56.合并区间.java)
+[golang版本](../../../codes/golang/56.合并区间.go)
+[python版本](../../../codes/python/56.合并区间.py)
 
 ## 插入区间
 

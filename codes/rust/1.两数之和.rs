@@ -11,9 +11,6 @@ impl Solution {
         let result: Vec<i32> = Vec::new();
         let mut num_map: HashMap<i32, usize> = HashMap::new();
         for i in 0..nums.len() {
-            num_map.insert(nums[i], i);
-        }
-        for i in 0..nums.len() {
             let num = nums[i];
             let diff = target - num;
             if num_map.contains_key(&diff) {
@@ -21,6 +18,8 @@ impl Solution {
                 if *diff_index != i {
                     return vec![i as i32, *diff_index as i32];
                 }
+            } else {
+                num_map.insert(num, i);
             }
         }
         result
