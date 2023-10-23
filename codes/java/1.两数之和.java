@@ -1,3 +1,7 @@
+
+// @lc code=start
+import java.util.HashMap;
+
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         // 维护 val -> index 的映射
@@ -6,7 +10,7 @@ class Solution {
             // 查表，看看是否有能和 nums[i] 凑出 target 的元素
             int need = target - nums[i];
             if (valToIndex.containsKey(need)) {
-                return new int[]{valToIndex.get(need), i};
+                return new int[] { valToIndex.get(need), i };
             }
             // 存入 val -> index 的映射
             valToIndex.put(nums[i], i);
@@ -14,3 +18,4 @@ class Solution {
         return null;
     }
 }
+// @lc code=end
