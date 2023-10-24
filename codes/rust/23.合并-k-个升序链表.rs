@@ -6,69 +6,57 @@
 
 // @lc code=start
 // Definition for singly-linked list.
-// #[derive(PartialEq, Eq, Clone, Debug)]
+// #[derive(PartialEq, Eq, Clone, Debug, PartialOrd, Ord)]
 // pub struct ListNode {
-//   pub val: i32,
-//   pub next: Option<Box<ListNode>>
+//     pub val: i32,
+//     pub next: Option<Box<ListNode>>,
 // }
-//
+
 // impl ListNode {
-//   #[inline]
-//   fn new(val: i32) -> Self {
-//     ListNode {
-//       next: None,
-//       val
+//     #[inline]
+//     fn new(val: i32) -> Self {
+//         ListNode { next: None, val }
 //     }
-//   }
 // }
+
+use std::cmp::{Ord, PartialOrd, Reverse};
+use std::collections::BinaryHeap;
+
+impl Ord for ListNode {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.val.cmp(&other.val)
+    }
+}
+
+impl PartialOrd for ListNode {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.val.cmp(&other.val))
+    }
+}
+
 impl Solution {
     pub fn merge_k_lists(mut lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>> {
         let len = lists.len();
         if len == 0 {
             return None;
         }
-
-        let mut interval = 1;
-        while interval < len {
-            for i in (0..len - interval).step_by(interval * 2) {
-                lists[i] = Self::merge_two_list(lists[i].take(), lists[i + interval].take());
+        let mut dummy = Box::new(ListNode::new(0));
+        let mut p = &mut dummy;
+        let mut heap = BinaryHeap::new();
+        for i in 0..len {
+            if lists[i].is_some() {
+                heap.push(Reverse(lists[i].take().unwrap()));
             }
-            interval *= 2;
         }
-
-        lists[0].take()
-    }
-
-    fn merge_two_list(
-        ans: Option<Box<ListNode>>,
-        l: Option<Box<ListNode>>,
-    ) -> Option<Box<ListNode>> {
-        if ans.is_none() {
-            return l;
-        }
-        if l.is_none() {
-            return ans;
-        }
-        // 转移所有权
-        let mut head = ListNode::new(0);
-        let mut tail = &mut head;
-        let mut left = ans;
-        let mut right = l;
-        while left.is_some() && right.is_some() {
-            let (left_node, right_node) = (left.unwrap(), right.unwrap());
-            if left_node.val < right_node.val {
-                tail.next = Some(left_node);
-                left = tail.next.as_mut().unwrap().next.take();
-                right = Some(right_node);
-            } else {
-                tail.next = Some(right_node);
-                left = Some(left_node);
-                right = tail.next.as_mut().unwrap().next.take();
+        while !heap.is_empty() {
+            let node = heap.pop().unwrap().0;
+            p.next = Some(Box::new(ListNode::new(node.val)));
+            p = p.next.as_mut().unwrap();
+            if node.next.is_some() {
+                heap.push(Reverse(node.next.unwrap()));
             }
-            tail = tail.next.as_mut().unwrap();
         }
-        tail.next = left.or(right);
-        head.next
+        dummy.next
     }
 }
 // @lc code=end
