@@ -23,54 +23,44 @@
 // }
 impl Solution {
     pub fn reverse_k_group(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
-        // println!("xx1: {:?}", head.as_ref());
-        if head.is_none() {
-            return head;
-        }
-        if k <= 1 {
+        // 如果节点为空或者k<=1(即没有节点需要反转)，则直接返回
+        if head.is_none() || k <= 1 {
             return head;
         }
         let mut head = head;
-        let mut idx = head.as_mut();
-        for _ in 1..k as usize {
-            if idx.is_none() {
+        let mut tail = head.as_mut();
+        // 从头节点出发，找出k个节点大小的子链表, 不足k个节点的话，直接返回
+        for _ in 0..k {
+            if tail.is_none() {
                 return head;
             }
-            idx = idx.unwrap().next.as_mut();
+            tail = tail.unwrap().next.as_mut();
         }
-        if idx.is_none() {
-            return head;
-        }
-        let tail = idx.unwrap().next.clone();
-        let mut val = -1;
-        if tail.is_some() {
-            val = tail.as_ref().unwrap().val;
-        }
-
-        // 翻转
-        // println!("xx2: {:?}", head.as_ref());
-        let (new_head, mut new_tail) = Self::reverse(head, tail.as_ref());
-        // println!("xx3: {:?}", new_head.as_ref());
-
-        // 递归
-        unsafe {
-            let result = Self::reverse_k_group(tail, k);
-            (*new_tail).next = result;
+        // 此时以[head, next_head)区间的子链表进行反转，然后返回新的头节点
+        let next_head = tail.cloned();
+        let (new_head, new_tail) = Self::reverse(head, next_head.as_ref());
+        // 如果next_head不为空，则递归反转后面的子链表，将子链表的头加入到当前的尾节点的后面
+        if next_head.is_some() {
+            unsafe {
+                let result = Self::reverse_k_group(next_head, k);
+                (*new_tail).next = result;
+            }
         }
         new_head
     }
 
-    // 反转区间链表，操作完成之后再返回新的head.这里使用的是[head,tail)右开区间
+    // 反转区间链表，操作完成之后再返回新的head和tail
+    // 这里使用的是[head,next_head)右开区间
     fn reverse(
         mut head: Option<Box<ListNode>>,
         target: Option<&Box<ListNode>>,
     ) -> (Option<Box<ListNode>>, *mut ListNode) {
         let head_heap = head.unwrap();
         let raw_ptr = Box::into_raw(head_heap);
-
+        // 因为涉及到链表的反转，rust中的所有权机制导致代码非常复杂，所以这里直接将头指针转换为裸指针，然后进行操作
         unsafe {
             let new_head = Some(Box::from_raw(raw_ptr));
-            // println!("xx21: {:?}", new_head.as_ref());
+            // 定义前、中、后三个指针，然后进行反转
             let (mut prev, mut curr, mut next) = (None, new_head, None);
             while curr.as_ref() != target {
                 next = curr.as_mut().unwrap().next.take();
