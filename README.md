@@ -90,28 +90,28 @@ $$
 
 ### 数组与链表
 
-- [数组与链表简要说明](./数组与链表/brief_introduction.md)
-- [题解](./数组与链表/problems.md)
+- [数组与链表简要说明](./docs/数据结构篇/数组与链表/brief_introduction.md)
+- [题解](./docs/数据结构篇/数组与链表/problems.md)
 
 ### 栈与队列
 
-- [栈与队列简要说明](./栈与队列/brief_introduction.md)
-- [题解](./栈与队列/problems.md)
+- [栈与队列简要说明](./docs/数据结构篇/栈与队列/brief_introduction.md)
+- [题解](./docs/数据结构篇/栈与队列/problems.md)
 
 ### 单调栈与单调队列
 
-- [单调栈与单调队列简要说明](./单调栈与单调队列/brief_introduction.md)
-- [题解](./单调栈与单调队列/problems.md)
+- [单调栈与单调队列简要说明](./docs/数据结构篇/单调栈与单调队列/brief_introduction.md)
+- [题解](./docs/数据结构篇/单调栈与单调队列/problems.md)
 
 ### 哈希表
 
-- [哈希表简要说明](./哈希表/brief_introduction.md)
-- [题解](./哈希表/problems.md)
+- [哈希表简要说明](./docs/数据结构篇/哈希表/brief_introduction.md)
+- [题解](./docs/数据结构篇/哈希表/problems.md)
 
 ### 树
 
-- [树简要说明](./树/brief_introduction.md)
-- [题解](./树/problems.md)
+- [树简要说明](./docs/数据结构篇/树/brief_introduction.md)
+- [题解](./docs/数据结构篇/树/problems.md)
 
 ### 堆
 
