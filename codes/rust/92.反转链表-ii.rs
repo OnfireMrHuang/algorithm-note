@@ -45,14 +45,17 @@ impl Solution {
         dummy_head.next
     }
 
-    // 我们可以定义反转
+    // 我们可以定义从head开始反转k个节点的函数
+    // 反转之后，head就变成了尾，注意需要将尾的后继节点指向第k+1个节点
     fn reverse_head_kth(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
         if head.is_none() {
             return head;
         }
+        // 因为需要保留head的所有权，方便最后设置后继节点，所以为了避免所有权机制的干扰，我们需要先将head转换为裸指针
         let raw_ptr = Box::into_raw(head.unwrap());
 
         unsafe {
+            // 接着再将裸指针还原，接下来就使用三指针方式反转k个节点
             let new_head = Some(Box::from_raw(raw_ptr));
             let (mut prev, mut curr, mut next) = (None, new_head, None);
             for _ in 0..=k as usize {
