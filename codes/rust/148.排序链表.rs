@@ -27,71 +27,25 @@ impl Solution {
         if head == None {
             return head;
         }
-        // 先算出链表长度,时间O(n)
-        let mut length = 0;
-        let mut curr = &head;
-        while let Some(node) = curr {
-            length += 1;
-            curr = &node.next;
+        let mut list: Vec<Option<Box<ListNode>>> = Vec::new();
+        // 第一步: 先将链表中的节点单独取出来，放到一个数组中
+        let mut head = head;
+        while head.is_some() {
+            let next = head.as_mut().unwrap().next.take();
+            list.push(head);
+            head = next;
         }
-        // 使用哨兵节点，方便后续操作
-        let mut head_pre = Some(Box::new(ListNode { val: 0, next: head }));
-        // 接着自底向上排序链表并合并
-        let mut sub_length = 1;
-        while sub_length < length {
-            // tail表示已经归并完成的区间的尾节点，初始化为头部指针
-            let mut tail = head_pre.as_mut().unwrap();
-            // 开始遍历链表
-            // 如果还有剩余节点，则需要继续处理
-            // 每次找长度为sub_length的两个区间
-            // 然后进行归并
-            while tail.next.is_some() {
-                let mut head1 = tail.next.take();
-                let mut tail1 = head1.as_mut().unwrap();
-                for _ in 1..sub_length {
-                    // 如果下一个节点为空，则说明遍历完
-                    if tail1.next.is_none() {
-                        break;
-                    }
-                    tail1 = tail1.next.as_mut().unwrap();
-                }
-                // 如果第一个区间就包含剩余的全部节点，不用做归并处理，
-                // 直接放回链表，然后跳出循环
-                if tail1.next.is_none() {
-                    tail.next = head1;
-                    break;
-                }
-
-                // 第一个区间尾巴节点的下一个节点作为第二个区间的头节点
-                let mut head2 = tail1.next.take();
-                let mut tail2 = head2.as_mut().unwrap();
-                for _ in 1..sub_length {
-                    // 如果下一个节点为空，则说明遍历完
-                    if tail2.next.is_none() {
-                        break;
-                    }
-                    tail2 = tail2.next.as_mut().unwrap();
-                }
-
-                // 从第二个区间的尾部和未处理区间断开
-                // 先记录未处理区间的头节点，方便复原
-                let next = tail2.next.take();
-
-                // 对两个区间开始进行合并
-                tail.next = Self::merge(head1, head2);
-
-                // 如果tail还有下一个节点
-                while tail.next.is_some() {
-                    // 移动tail到下一个节点
-                    tail = tail.next.as_mut().unwrap();
-                }
-                // 将已合并区间和未合并区间连起来，防止链表断裂
-                tail.next = next;
+        // 第二步: 开始对数组中的链表进行归并排序
+        let mut step = 1;
+        while step < list.len() {
+            let mut i = 0;
+            while i + step < list.len() {
+                list[i] = Self::merge(list[i].take(), list[i + step].take());
+                i += step * 2;
             }
-            sub_length <<= 1;
+            step *= 2;
         }
-
-        head_pre.unwrap().next
+        list.get(0).unwrap().to_owned()
     }
 
     // 合并两个排序好的链表
