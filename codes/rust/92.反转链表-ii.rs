@@ -45,6 +45,7 @@ impl Solution {
         dummy_head.next
     }
 
+    // 我们可以定义反转
     fn reverse_head_kth(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
         if head.is_none() {
             return head;
