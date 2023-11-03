@@ -127,6 +127,9 @@ $$
 
 ### 双指针
 
+- [双指针简要说明](./docs/算法篇/双指针/brief_introduction.md)
+- [题解](./docs/算法篇/双指针/problems.md)
+
 ### 滑动窗口
 
 ### 前缀和
