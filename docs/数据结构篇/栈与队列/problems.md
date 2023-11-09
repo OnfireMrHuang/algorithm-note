@@ -45,7 +45,10 @@
 > 输入：s = "1 + 1"
 > 输出：2
 
-**题目解法**: 该题目
+**题目解法**:
+
+下面是`labuladong`的题解思路，很清晰，直接引用了:
+[计算器解题思路](https://labuladong.github.io/algo/di-san-zha-24031/jing-dian--a94a0/ru-he-shi--24fe4/)
 
 [rust版本](../../../codes/rust/224.基本计算器.rs) |
 [java版本](../../../codes/java/224.基本计算器.java) |

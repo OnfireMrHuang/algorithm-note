@@ -10,106 +10,72 @@ use std::vec::Vec;
 
 impl Solution {
     pub fn calculate(s: String) -> i32 {
+        // 将字符串转换为字符数组
+        let chars = s.chars().collect::<Vec<char>>();
+        let ans = Self::helper(&chars, 0);
+        ans.1
+    }
+
+    fn helper(chars: &Vec<char>, start: usize) -> (usize, i32) {
         let mut digit_stack: Vec<i32> = Vec::new(); // 数字栈
-        let mut ops_stack: Vec<char> = Vec::new(); // 操作符栈
-
-        let char_vec = s.chars();
-        let mut digit: i32 = -1;
-
-        // 初始化，往数字栈默认添加一个0值(兼容-1场景)
-        digit_stack.push(0);
-
-        let mut left_parentheses_flag = false; //左括号标记
-        for c in char_vec {
+        let mut sign = '+'; // 定义符号
+        let mut num = 0; // 定义一个数字
+        let mut i = start;
+        while i < chars.len() {
+            // 获取当前字符
+            let c = chars[i];
+            i += 1;
+            // 如果是数字则缓存数字字符形成完整数字
+            if c.is_digit(10 as u32) {
+                num = num * 10 + c.to_digit(10 as u32).unwrap() as i32;
+                continue;
+            }
+            // 忽略非法的字符
+            if c.is_whitespace() {
+                continue;
+            }
             match c {
-                '+' | '-' => {
-                    // 首先判断是否有数字，有则先入数字栈
-                    if digit != -1 {
-                        digit_stack.push(digit);
-                    }
-                    // 如果上一个元素是左括号，则默认压入数字0
-                    if left_parentheses_flag {
-                        digit_stack.push(0);
-                    }
-                    // 将栈里的元素做一个计算
-                    let pop_op = Self::calc(&mut digit_stack, &mut ops_stack);
-                    if pop_op == Some('(') {
-                        ops_stack.push('(');
-                    }
-                    // 将数字重置为-1
-                    digit = -1;
-                    // 将操作符压栈
-                    ops_stack.push(c);
-                    left_parentheses_flag = false;
-                }
                 '(' => {
-                    // 首先将数字入栈
-                    if digit != -1 {
-                        digit_stack.push(digit);
+                    // 当遇到左括号时，递归计算内部括号的表达式并返回末尾索引和结果
+                    let (sub_problem_end, sub_problem_val) = Self::helper(chars, i);
+                    i = sub_problem_end;
+                    match sign {
+                        '+' => digit_stack.push(sub_problem_val),
+                        '-' => digit_stack.push(-sub_problem_val),
+                        _ => {}
                     }
-                    // 重置数字
-                    digit = -1;
-                    // 入栈
-                    ops_stack.push(c);
-                    left_parentheses_flag = true;
                 }
                 ')' => {
-                    if digit != -1 {
-                        digit_stack.push(digit);
-                    }
-                    // 重置数字
-                    digit = -1;
-                    while Self::calc(&mut digit_stack, &mut ops_stack) != Some('(') {}
-                    left_parentheses_flag = false;
-                }
-                '0'..='9' => {
-                    let num = c.to_digit(10).unwrap() as i32;
-                    if digit == -1 {
-                        digit = num;
-                    } else {
-                        digit *= 10;
-                        digit += num;
-                    }
-                    left_parentheses_flag = false;
+                    break;
                 }
                 _ => {}
             }
-        }
-        // 如果还有缓存的数字则压栈
-        if digit != -1 {
-            digit_stack.push(digit);
-        }
-        // 如果栈里面还有数据，则继续弹出
-        while Self::calc(&mut digit_stack, &mut ops_stack) != None {}
-        digit_stack.pop().unwrap()
-    }
-
-    // 执行计算并返回操作符
-    fn calc(digit_stack: &mut Vec<i32>, ops_stack: &mut Vec<char>) -> Option<char> {
-        let op_value = ops_stack.pop();
-        if op_value == None {
-            return None;
-        }
-        let op = op_value.unwrap();
-        // 从操作符栈里pop出一个操作符号
-        match op {
-            '+' => {
-                let right_digit = digit_stack.pop().unwrap();
-                let left_digit = digit_stack.pop().unwrap();
-                let new_digit = right_digit + left_digit;
-                digit_stack.push(new_digit);
-                Some(op)
+            match sign {
+                '+' => digit_stack.push(num),
+                '-' => digit_stack.push(-num),
+                '*' => {
+                    // 如果是乘法，则弹出数字先进行计算
+                    let last_num = digit_stack.pop().unwrap();
+                    digit_stack.push(last_num * num);
+                }
+                '/' => {
+                    // 如果是除法，则弹出数字先进行计算
+                    let last_num = digit_stack.pop().unwrap();
+                    digit_stack.push(last_num / num);
+                }
+                _ => {}
             }
-            '-' => {
-                let right_digit = digit_stack.pop().unwrap();
-                let left_digit = digit_stack.pop().unwrap();
-                let new_digit = left_digit - right_digit;
-                digit_stack.push(new_digit);
-                Some(op)
-            }
-            '(' => Some(op),
-            _ => None,
+            // 然后重置数字和符号
+            num = 0;
+            sign = c;
         }
+        // 最后再将缓存的数字压入栈中并对栈中的数字进行累加
+        match sign {
+            '+' => digit_stack.push(num),
+            '-' => digit_stack.push(-num),
+            _ => {}
+        }
+        (i, digit_stack.iter().sum())
     }
 }
 // @lc code=end
