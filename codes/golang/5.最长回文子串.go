@@ -8,5 +8,6 @@
 func longestPalindrome(s string) string {
 
 }
+
 // @lc code=end
 

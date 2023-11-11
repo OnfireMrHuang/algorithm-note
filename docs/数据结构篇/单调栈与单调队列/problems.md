@@ -37,6 +37,8 @@
 [golang版本](../../../codes/golang/739.每日温度.go) |
 [python版本](../../../codes/python/739.每日温度.py)
 
+<br>
+
 ## 239.滑动窗口最大值
 
 > [题目描述](https://leetcode-cn.com/problems/sliding-window-maximum/)
