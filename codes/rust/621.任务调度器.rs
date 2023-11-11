@@ -11,13 +11,14 @@ impl Solution {
             return 0;
         }
         let size = tasks.len();
+        // 创建一个同类任务的队列
         let mut word_cnt: Vec<usize> = vec![0; 26];
         for task in tasks {
             let index = task as usize - 'A' as usize;
             word_cnt[index] += 1;
         }
         let mut max_cnt = 1;
-        // 求出其中的最大值
+        // 求出其中任务数的最大值
         for cnt in word_cnt.iter() {
             max_cnt = std::cmp::max(max_cnt, cnt.to_owned());
         }
