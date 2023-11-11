@@ -70,6 +70,8 @@ impl NestedIterator {
             if nums.is_empty() {
                 continue;
             }
+            // 逆序插入到nested_list的头部
+            // 由于nested_list是Vec，插入到头部的操作是O(n)的，所以如果有性能要求，可以将nested_list改为双端队列或链表
             for num in nums.iter().rev() {
                 self.nested_list
                     .insert(0, NestedInteger::Int(num.to_owned()));
@@ -79,6 +81,7 @@ impl NestedIterator {
 
     fn flatten(nested_list: &Vec<NestedInteger>) -> Vec<i32> {
         let mut res = vec![];
+        // 递归展平列表
         for item in nested_list {
             if item.is_integer() {
                 res.push(item.get_integer());
