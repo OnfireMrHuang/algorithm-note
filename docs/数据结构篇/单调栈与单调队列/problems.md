@@ -17,11 +17,22 @@
 
 > [题目描述](https://leetcode.cn/problems/next-greater-element-ii/description/)
 
-**题目解法**:  
+**题目解法**:  这道题目很直觉的一个做法就是考虑将数组复制一份，然后拼接到原数组的后面，这样就可以将循环数组转换为线性数组，然后再使用单调栈来解决。
+
+[rust版本](../../../codes/rust/503.下一个更大元素-ii.rs) |
+[java版本](../../../codes/java/503.下一个更大元素-ii.java) |
+[golang版本](../../../codes/golang/503.下一个更大元素-ii.go) |
+[python版本](../../../codes/python/503.下一个更大元素-ii.py)
 
 <br>
 
 
 ## 239.滑动窗口最大值
+
+> [题目描述](https://leetcode-cn.com/problems/sliding-window-maximum/)
+
+**题目解法**:
+
+[rust版本]
 
 <br>
