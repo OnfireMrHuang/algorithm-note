@@ -5,7 +5,6 @@
  */
 
 // @lc code=start
-
 use std::collections::VecDeque;
 
 struct MonotonicQueue {
@@ -40,26 +39,6 @@ impl MonotonicQueue {
 
     fn max(&self) -> i32 {
         self.deque.front().unwrap().clone()
-    }
-}
-
-struct MaxSlidingWindow {}
-
-impl MaxSlidingWindow {
-    pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
-        let mut result: Vec<i32> = Vec::new();
-        let length = nums.len();
-        let mut queue = MonotonicQueue::new();
-        for i in 0..length {
-            if i < (k - 1) as usize {
-                queue.push(nums[i]);
-                continue;
-            }
-            queue.push(nums[i]);
-            result.push(queue.max());
-            queue.pop(nums[i - (k - 1) as usize]);
-        }
-        result
     }
 }
 
