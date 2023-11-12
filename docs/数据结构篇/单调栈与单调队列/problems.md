@@ -11,7 +11,7 @@
 [golang版本](../../../codes/golang/496.下一个更大元素-i.go) |
 [python版本](../../../codes/python/496.下一个更大元素-i.py)
 
-<br>
+</br>
 
 ## 503.下一个更大元素 II
 
@@ -24,7 +24,7 @@
 [golang版本](../../../codes/golang/503.下一个更大元素-ii.go) |
 [python版本](../../../codes/python/503.下一个更大元素-ii.py)
 
-<br>
+</br>
 
 ## 739.每日温度
 
@@ -37,7 +37,7 @@
 [golang版本](../../../codes/golang/739.每日温度.go) |
 [python版本](../../../codes/python/739.每日温度.py)
 
-<br>
+</br>
 
 ## 239.滑动窗口最大值
 
@@ -50,4 +50,4 @@
 [golang版本](../../../codes/golang/239.滑动窗口最大值.go) |
 [python版本](../../../codes/python/239.滑动窗口最大值.py)
 
-<br>
+</br>
