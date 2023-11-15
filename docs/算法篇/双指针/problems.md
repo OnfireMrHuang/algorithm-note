@@ -42,6 +42,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
+**题目解法**: 题目可以使用双指针技巧解决，初始化slow和fast指针指向数组的第一个元素，然后移动fast指针直到nums[fast] > nums[slow]，然后赋值nums[slow+1] = nums[fast]并更新slow = slow +1; 接着继续移动fast指针，直到遍历完整个数组，此时的slow指针指向的就是去重后的数组的最后一个元素。
+
+[rust版本](../../../codes/rust/26.删除有序数组中的重复项.rs) |
+[java版本](../../../codes/java/26.删除有序数组中的重复项.java) |
+[golang版本](../../../codes/golang/26.删除有序数组中的重复项.go) |
+[python版本](../../../codes/python/26.删除有序数组中的重复项.py)
+
 </br>
 
 ## 27.移除元素
