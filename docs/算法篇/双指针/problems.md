@@ -55,6 +55,12 @@
 
 > [题目描述](https://leetcode-cn.com/problems/remove-element/)
 
+**题目解法**: 该题可以使用双指针技巧，初始化slow和fast指针指向数组的第一个元素，然后开始不断移动fast指针直到末尾，如果nums[fast] != val, 则同步更新slow指针移动和nums[slow] = nums[fast]; 如果nums[fast] == val, 此时只需要移动fast指针即可，因为此时slow指针刚好就指向需要被删除的元素，在下一次的nums[fast] != val 判断中，slow指向的需要被删除的值刚好就会被覆盖掉。
+
+[rust版本](../../../codes/rust/27.移除元素.rs) |
+[java版本](../../../codes/java/27.移除元素.java) |
+[golang版本](../../../codes/golang/27.移除元素.go) |
+[python版本](../../../codes/python/27.移除元素.py)
 
 </br>
 
