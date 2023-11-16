@@ -7,18 +7,19 @@
 // @lc code=start
 impl Solution {
     pub fn trap(height: Vec<i32>) -> i32 {
-        let (mut left, mut right) = (0, height.len() - 1);
-        let (mut left_max, mut right_max) = (0, 0);
         let mut res = 0;
-        while left < right {
-            left_max = std::cmp::max(left_max, height[left]);
-            right_max = std::cmp::max(right_max, height[right]);
-            if height[left] < height[right] {
-                res += left_max - height[left];
-                left += 1;
-            } else {
-                res += right_max - height[right];
-                right -= 1;
+        let mut left_max_memo = vec![0; height.len()];
+        let mut right_max_memo = vec![0; height.len()];
+        for i in 1..height.len() - 1 {
+            left_max_memo[i] = left_max_memo[i - 1].max(height[i - 1]);
+        }
+        for i in (1..height.len() - 1).rev() {
+            right_max_memo[i] = right_max_memo[i + 1].max(height[i + 1]);
+        }
+        for i in 1..height.len() - 1 {
+            let min = left_max_memo[i].min(right_max_memo[i]);
+            if min > height[i] {
+                res += min - height[i];
             }
         }
         res
