@@ -68,6 +68,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/trapping-rain-water/)
 
+**题目解法**: 该题目中一根柱子能接多少水是根据左右两侧的最大值决定的，我们可以使用双指针技巧，从两边同时向中间靠拢，过程中记录左右两边的最大值，这样就可以知道当前柱子能接多少水了。
+
+[rust版本](../../../codes/rust/42.接雨水.rs) |
+[java版本](../../../codes/java/42.接雨水.java) |
+[golang版本](../../../codes/golang/42.接雨水.go) |
+[python版本](../../../codes/python/42.接雨水.py)
+
 </br>
 
 ## 15.三数之和
