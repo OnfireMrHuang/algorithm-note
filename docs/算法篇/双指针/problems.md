@@ -83,11 +83,25 @@
 
 > [题目描述](https://leetcode-cn.com/problems/3sum/)
 
+**题目解法**: todo
+
+[rust版本](../../../codes/rust/15.三数之和.rs) |
+[java版本](../../../codes/java/15.三数之和.java) |
+[golang版本](../../../codes/golang/15.三数之和.go) |
+[python版本](../../../codes/python/15.三数之和.py)
+
 </br>
 
 ## 18.四数之和
 
 > [题目描述](https://leetcode-cn.com/problems/4sum/)
+
+**题目解法**: todo
+
+[rust版本](../../../codes/rust/18.四数之和.rs) |
+[java版本](../../../codes/java/18.四数之和.java) |
+[golang版本](../../../codes/golang/18.四数之和.go) |
+[python版本](../../../codes/python/18.四数之和.py)
 
 </br>
 
@@ -96,7 +110,6 @@
 > [题目描述](https://leetcode-cn.com/problems/palindrome-linked-list/)
 
 </br>
-
 
 ## 19.删除链表的倒数第N个节点
 
