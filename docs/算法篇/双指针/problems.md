@@ -125,6 +125,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
 
+**题目解法**: 题目进阶要求只扫描一遍来解决，我们同样可以使用快慢指针来实现，首先`fast`指针指向头节点并先走`n+1`步(多走一步是因为我们最终需要的是指向倒数第n+1个节点来操作)，然后再让`slow`指针指向头节点，然后`fast`和`slow`一起往后移动，直到`fast`指向空，此时`slow`就指向倒数第n个节点的前一个节点，然后我们只需要将`slow.next = slow.next.next`即可。注意我们需要从一个虚拟节点开始，这样当删除的倒数节点是头节点时，我们也可以正常处理。
+
+[rust版本](../../../codes/rust/19.删除链表的倒数第N个节点.rs) |
+[java版本](../../../codes/java/19.删除链表的倒数第N个节点.java) |
+[golang版本](../../../codes/golang/19.删除链表的倒数第N个节点.go) |
+[python版本](../../../codes/python/19.删除链表的倒数第N个节点.py)
+
 </br>
 
 ## 141.环形链表
