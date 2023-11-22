@@ -151,6 +151,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 
+**题目解法**: xxx
+
+[rust版本](../../../codes/rust/142.环形链表-ii.rs) |
+[java版本](../../../codes/java/142.环形链表-ii.java) |
+[golang版本](../../../codes/golang/142.环形链表-ii.go) |
+[python版本](../../../codes/python/142.环形链表-ii.py)
+
 </br>
 
 ## 86.分隔链表
