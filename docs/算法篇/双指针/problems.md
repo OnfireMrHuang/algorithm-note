@@ -198,6 +198,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/move-zeroes/)
 
+**题目解法**: 该题目可以套用双指针技巧，使用`slow`和`fast`指针遍历数组，如果`slow`和`fast`指向的值不等于0就将`fast`指向的值赋值给`slow`指向的值，然后`slow`和`fast`指针同时向后移动，如果`slow`和`fast`指向的值等于0，那么只需要移动`fast`指针即可，因为`slow`指针指向的值已经被`fast`指针指向的值覆盖了。当`fast`为空时，说明数组已经遍历完了，此时我们只需要将`slow`指针后面的值全部置为0即可。
+
+[rust版本](../../../codes/rust/283.移动零.rs) |
+[java版本](../../../codes/java/283.移动零.java) |
+[golang版本](../../../codes/golang/283.移动零.go) |
+[python版本](../../../codes/python/283.移动零.py)
+
 </br>
 
 ## 344.反转字符串
