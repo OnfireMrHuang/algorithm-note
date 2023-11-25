@@ -185,6 +185,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
 
+**题目解法**: 该题目可以直接套用双指针技巧，初始化`left`指针指向数组的第一个元素，`right`指针指向数组的最后一个元素，如果两数之和大于目标数则左移`right`指针，如果两数之和小于目标数则右移`left`指针，如果两数之和等于目标数则返回`left`和`right`指针即可。
+
+[rust版本](../../../codes/rust/167.两数之和-ii-输入有序数组.rs) |
+[java版本](../../../codes/java/167.两数之和-ii-输入有序数组.java) |
+[golang版本](../../../codes/golang/167.两数之和-ii-输入有序数组.go) |
+[python版本](../../../codes/python/167.两数之和-ii-输入有序数组.py)
+
 </br>
 
 ## 283.移动零
