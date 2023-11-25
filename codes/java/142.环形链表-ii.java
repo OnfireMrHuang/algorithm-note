@@ -5,7 +5,8 @@ public class Solution {
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;
-            if (fast == slow) break;
+            if (fast == slow)
+                break;
         }
         // 上面的代码类似 hasCycle 函数
         if (fast == null || fast.next == null) {
