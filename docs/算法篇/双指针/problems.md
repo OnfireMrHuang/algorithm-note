@@ -211,4 +211,11 @@
 
 > [题目描述](https://leetcode-cn.com/problems/reverse-string/)
 
+**题目解法**: 该题目可以套用双指针技巧，其中`left`指向数组的第一个元素，`right`指向数组的最后一个元素，然后不断交换`left`和`right`指向的值，直到`left`和`right`指针相遇。
+
+[rust版本](../../../codes/rust/344.反转字符串.rs) |
+[java版本](../../../codes/java/344.反转字符串.java) |
+[golang版本](../../../codes/golang/344.反转字符串.go) |
+[python版本](../../../codes/python/344.反转字符串.py)
+
 </br>
