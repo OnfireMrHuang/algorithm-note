@@ -24,14 +24,20 @@
 
 </br>
 
-## 560. 和为K的子数组
-
-> [题目描述](https://leetcode-cn.com/problems/subarray-sum-equals-k/)
-
-</br>
-
 ## 1044. 最长重复子串
 
 > [题目描述](https://leetcode-cn.com/problems/longest-duplicate-substring/)
+
+</br>
+
+## 146. LRU缓存机制
+
+> [题目描述](https://leetcode-cn.com/problems/lru-cache/)
+
+</br>
+
+## 460. LFU缓存
+
+> [题目描述](https://leetcode-cn.com/problems/lfu-cache/)
 
 </br>
