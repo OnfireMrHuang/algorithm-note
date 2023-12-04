@@ -1,11 +1,5 @@
 # 题解
 
-## 136. 只出现一次的数字
-
-> [题目描述](https://leetcode-cn.com/problems/single-number/)
-
-</br>
-
 ## 217. 存在重复元素
 
 > [题目描述](https://leetcode-cn.com/problems/contains-duplicate/)
