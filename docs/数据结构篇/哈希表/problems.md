@@ -4,6 +4,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/contains-duplicate/)
 
+**题目解法**: 该题目可以使用哈希表轻松解决，对于每一个元素，如果哈希表中不存在该元素，则将该元素加入哈希表中，否则返回`true`。
+
+[rust版本](../../../codes/rust/217.存在重复元素.rs) |
+[java版本](../../../codes/java/217.存在重复元素.java) |
+[golang版本](../../../codes/golang/217.存在重复元素.go) |
+[python](../../../codes/python/217.存在重复元素.py)
+
 </br>
 
 ## 219. 存在重复元素 II
