@@ -17,6 +17,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/contains-duplicate-ii/)
 
+**题目解法**: 该题目同样可以使用哈希表解决，对于每一个元素，如果哈希表中不存在该元素，则将该元素加入哈希表中，否则判断该元素与哈希表中该元素的下标差是否小于等于`k`，如果是则返回`true`，否则继续遍历。
+
+[rust版本](../../../codes/rust/219.存在重复元素II.rs) |
+[java版本](../../../codes/java/219.存在重复元素II.java) |
+[golang版本](../../../codes/golang/219.存在重复元素II.go) |
+[python](../../../codes/python/219.存在重复元素II.py)
+
 </br>
 
 ## 438. 找到字符串中所有字母异位词
