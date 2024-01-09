@@ -126,6 +126,19 @@ def find_duplicate_sub_str(s, p_len):
 
 > [题目描述](https://leetcode-cn.com/problems/lru-cache/)
 
+**题目解法**:
+
+该题目可以通过链表+哈希数据结构来解决,类似java的LinkedHashMap，结构图如下所示:
+
+![iru](../../../resources/images/数据结构/iru.png)
+
+其中针对哈希表中的值进行改造，使其拥有前继指针和后继指针，当通过`Get方法`或者`Put方法`更新哈希表中key的同时，将value值移动到双向链表的头部来表示其最近被使用，当哈希表中的值超过了缓存容量时，将尾部元素从双向链表中断开，并从哈希表中删除。
+
+[rust版本](../../../codes/rust/146.lru-缓存.rs) |
+[java版本](../../../codes/java/146.lru-缓存.java) |
+[golang版本](../../../codes/golang/146.lru-缓存.go) |
+[python](../../../codes/python/146.lru-缓存.py)
+
 </br>
 
 ## 460. LFU缓存
