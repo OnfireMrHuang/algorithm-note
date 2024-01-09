@@ -71,6 +71,50 @@ return s[start:end]
 
 所以我们优化为使用二分查找的思路来查找子串，同时，对比子串的判断，我们是逐个字符对比，这里我们可以优化为使用Rabin-Karp算法来对比子串，这样可以将判断子串的时间复杂度降低到`O(1)`，所以总的时间复杂度为`O(n^2logn)`。
 
+**Rabin-Karp简要说明:**
+
+Rabin-Karp算法是一种字符串匹配算法，采用了哈希 + 滑动窗口的思想，将模式串和主串匹配的时间复杂度降低到了`O(n)`。详细说明可以参考[这里](https://zh.wikipedia.org/wiki/%E6%8B%89%E5%AE%BE-%E5%8D%A1%E6%99%AE%E7%AE%97%E6%B3%95)。
+
+如下是Rabin-Karp算法的示例代码:
+
+```python
+# s是主串，p_len是模式串长度
+def find_duplicate_sub_str(s, p_len):
+    """
+    查询字符串中是否存在重复子串
+    示例:
+        例如字符串(brcbrc), 模式串长度为3:
+        例如字符串(brcbrc), 模式串长度为3:
+        初始化模式串哈希值:
+        hash_val = 0 * prime + ord('b') - ord('a') = 1，接下来对该值按29进位并加上下一个字符的unicode差值
+        hash_val = 1 * prime + ord('r') - ord('a') = 29 + 17 = 46， 接下来对该值按29进位并加上下一个字符的unicode差值
+        hash_val = 46 * prime + ord('c') - ord('a') = 1344 + 2 = 1336
+        power = prime ^ p_len = 29 ^ 3 = 24389
+        到这里我们就好理解了，我们假设再往后移动一个字符，那么就是hash_val = hash_val * prime + ord('b') - ord('a'), 因为此时我们的窗口长度扩大为了4，所以我们需要将第一个字符的权重减去，所以就是hash_val = hash_val - (ord('b')-ord('a')) * power
+        最终我们完整的滑动公示为: hash_val = hash_val * prime + last_unicode_diff_val - first_unicode_diff_val * power
+
+    param s: 主串
+    param p_len: 模式串长度
+    return: 如果存在重复子串，返回重复子串, 否则返回空串
+    """
+    prime = 29 # 选取一个质数，因为质数的乘法比较少，所以哈希冲突的概率比较小，这里选择29的原因是因为26个字母加上3个特殊字符，正好是29个
+    hash = 0 # 初始化哈希值为0
+    power = 1 # 初始化权重为1
+    map = {}
+    sArr = list(s)
+    for i in range(length):
+        power *= prime
+        hash = hash * prime + (ord(sArr[i]) - ord('a'))
+    map[hash] = 0
+    for i in range(length, len(s)):
+        hash = hash * prime + ord(sArr[i]) - ord('a') - power * (ord(sArr[i - length]) - ord('a'))
+        if hash in map:
+            idx = map[hash]
+            return s[idx:idx + length]
+        map[hash] = i - length + 1
+    return ""
+```
+
 [rust版本](../../../codes/rust/1044.最长重复子串.rs) |
 [java版本](../../../codes/java/1044.最长重复子串.java) |
 [golang版本](../../../codes/golang/1044.最长重复子串.go) |
