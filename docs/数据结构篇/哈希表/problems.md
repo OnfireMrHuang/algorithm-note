@@ -145,4 +145,12 @@ def find_duplicate_sub_str(s, p_len):
 
 > [题目描述](https://leetcode-cn.com/problems/lfu-cache/)
 
+**题目解法**:
+
+
+[rust版本](../../../codes/rust/460.lfu-缓存.rs) |
+[java版本](../../../codes/java/460.lfu-缓存.java) |
+[golang版本](../../../codes/golang/460.lfu-缓存.go) |
+[python](../../../codes/python/460.lfu-缓存.py)
+
 </br>
