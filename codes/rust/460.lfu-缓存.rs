@@ -99,7 +99,7 @@ impl LFUCache {
         key_set.pop_front();
         if key_set.is_empty() {
             self.fk_map.remove(&self.min_freq);
-            // self.min_freq += 1;
+            // self.min_freq += 1; // 这里不需要加1，因为当出现淘汰时，一定是来了一个新key, 那么min_freq一定会被置1
         }
         // 从key到频率的映射中，删除该key
         self.kf_map.remove(&del_key);

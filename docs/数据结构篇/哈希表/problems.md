@@ -147,6 +147,34 @@ def find_duplicate_sub_str(s, p_len):
 
 **题目解法**:
 
+该题目完全是一个设计题，要实现一个LFU缓存，最重要的当缓存满了之后找出频率最小的key并删除，大体思路如下:
+
+- 首先我们需要维护一个正常的哈希表来存储正常的kv键值对以及一个容量变量，比如叫`kv_map`和`capacity`。
+- 然后我们需要维护每个key对应的操作频率，也就是操作计数，这里也需要一个哈希表来存储，比如叫`kf_map`。
+- 因为我们是统计最小频率，所以也需要维护一个可以通过频率快速找到要淘汰的key的哈希表，比如叫`fk_map`以及记录最小频率的变量`min_freq`。
+- 接下来对该LFU缓存进行操作时，其内部规则如下:
+  - PUT操作
+    - 情况1: 如果key已存在`key_map`中:
+      - 更新`kv_map`中的value值
+      - 从`kf_map`中获取旧的频率`old_freq`, 并将`old_freq`递增1后更新回`kf_map`中
+      - 从`fk_map`中获取旧频率对应的key列表`old_key_list`, 并将`old_key_list`中的key删除，如果此时`old_key_list`为空，`old_freq`又等于`min_freq`，那么`min_freq`递增1，同时将`old_freq`频率值从`fk_map`中删除
+      - 将`old_freq`递增1后将对应的key打包添加到`fk_map`中
+    - 情况2: 如果`kv_map`的长度小于`capacity`
+      - 将key和value添加到`kv_map`中
+      - 将key和频率1添加到`kf_map`中
+      - 将频率1和key打包添加到`fk_map`中
+      - 将`min_freq`设置为1
+    - 情况3: 如果`kv_map`的长度大于等于`capacity`
+      - 根据`min_freq`从`fk_map`中获取对应的key列表`min_key_list`
+      - 从`min_key_list`中获取第一个key`min_key`, 并将`min_key`从`min_key_list`中删除,并从`kf_map`和`kv_map`中删除来淘汰该key
+      - 如果此时`min_key_list`为空，那么`min_freq`递增1，同时将`old_freq`频率值从`fk_map`中删除
+      - 接下来对新来的key进行操作，操作步骤同情况1和情况2
+  - GET操作
+    - 如果key不存在`key_map`中: 返回-1
+    - 如果key存在`key_map`中:
+      - 从`kf_map`中获取旧的频率`old_freq`, 并将`old_freq`递增1后更新回`kf_map`中
+      - 从`fk_map`中获取旧频率对应的key列表`old_key_list`, 并将`old_key_list`中的key删除，如果此时`old_key_list`为空，`old_freq`又等于`min_freq`，那么`min_freq`递增1, 同时将`old_freq`频率值从`fk_map`中删除
+      - 将`old_freq`递增1后将对应的key打包添加到`fk_map`中
 
 [rust版本](../../../codes/rust/460.lfu-缓存.rs) |
 [java版本](../../../codes/java/460.lfu-缓存.java) |
