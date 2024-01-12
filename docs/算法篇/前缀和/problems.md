@@ -20,6 +20,13 @@
 
 [原题链接](https://leetcode-cn.com/problems/range-sum-query-immutable/)
 
+**题目解法:**  该题目的解决思路如下，类`NumArray`维护一张哈希表，存储`nums`中每个元素的前缀和，初始化该类的时候将`nums`中每个元素的前缀和存入哈希表中，然后在`sumRange`方法中，我们只需要通过`end`下标去哈希表中查找对应的前缀和，然后减去`start`下标对应的前缀和即可得到结果
+
+[rust版本](../../../codes//rust/303.区域和检索-数组不可变.rs) |
+[java版本](../../../codes/java/303.区域和检索-数组不可变.java) |
+[golang版本](../../../codes/golang/303.区域和检索-数组不可变.go) |
+[python版本](../../../codes/python/303.区域和检索-数组不可变.py)
+
 ## 304. 二维区域和检索 - 矩阵不可变
 
 [原题链接](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)
