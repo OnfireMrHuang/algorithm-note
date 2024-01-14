@@ -159,6 +159,9 @@ $$
 
 ### 排序
 
+- [排序简要说明](./docs/算法篇/排序/brief_introduction.md)
+- [题解](./docs/算法篇/排序/problems.md)
+
 ### 搜索
 
 ### 贪心

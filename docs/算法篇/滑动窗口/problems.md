@@ -6,6 +6,10 @@
 
 </br>
 
+## 76. 最小覆盖子串
+
+## 239. 滑动窗口最大值
+
 ## 438. 找到字符串中所有字母异位词
 
 > [题目描述](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
@@ -18,3 +22,5 @@
 [python](../../../codes/python/438.找到字符串中所有字母异位词.py)
 
 </br>
+
+## 480. 滑动窗口中位数
