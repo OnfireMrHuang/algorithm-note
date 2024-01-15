@@ -35,6 +35,8 @@ impl Solution {
                 continue;
             }
 
+            println!("{}: {}", left, right);
+
             // 更新最小的覆盖子串长度大小和左、右游标
             if right - left <= min_window_size {
                 min_window_size = right - left;
