@@ -32,17 +32,6 @@
 
 </br>
 
-## 239. 滑动窗口最大值
-
-> [题目描述](https://leetcode-cn.com/problems/sliding-window-maximum/)
-
-**题目解法:**
-
-[rust版本](../../../codes/rust/239.滑动窗口最大值.rs) |
-[java版本](../../../codes/java/239.滑动窗口最大值.java) |
-[golang版本](../../../codes/golang/239.滑动窗口最大值.go) |
-[python](../../../codes/python/239.滑动窗口最大值.py)
-
 ## 438. 找到字符串中所有字母异位词
 
 > [题目描述](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
