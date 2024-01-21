@@ -1,32 +1,25 @@
-/*
- * @lc app=leetcode.cn id=96 lang=rust
- *
- * [96] 不同的二叉搜索树
- */
-
 // @lc code=start
 impl Solution {
     pub fn num_trees(n: i32) -> i32 {
-        if n <= 0 {
-            return 0;
-        }
-        if n == 1 {
+        let mut memo = vec![vec![0; n as usize + 1]; n as usize + 1];
+        Self::count(1, n, &mut memo)
+    }
+
+    fn count(lo: i32, hi: i32, memo: &mut Vec<Vec<i32>>) -> i32 {
+        if lo > hi {
             return 1;
         }
-        if n == 2 {
-            return 2;
+        if memo[lo as usize][hi as usize] != 0 {
+            return memo[lo as usize][hi as usize];
         }
-        let mut g: Vec<i32> = Vec::with_capacity(n as usize);
-        g.push(1);
-        g.push(1);
-        for i in 3..=n + 1 {
-            let mut num = 0;
-            for j in 1..i {
-                num += g[(j - 1) as usize] * g[(i - j - 1) as usize];
-            }
-            g.push(num);
+        let mut res = 0;
+        for mid in lo..=hi {
+            let left = Self::count(lo, mid - 1, memo);
+            let right = Self::count(mid + 1, hi, memo);
+            res += left * right;
         }
-        g.pop().unwrap()
+        memo[lo as usize][hi as usize] = res;
+        res
     }
 }
 // @lc code=end
