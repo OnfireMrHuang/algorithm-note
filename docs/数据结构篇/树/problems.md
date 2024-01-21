@@ -4,6 +4,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
+**题目解法:** 该题目正如简要说明中深度优先遍历的一样，先访问左子树，再访问根节点，最后访问右子树。因此，我们可以使用递归的方式来实现该题目。
+
+[rust版本](../../../codes/rust/94.二叉树的中序遍历.rs) |
+[java版本](../../../codes/java/94.二叉树的中序遍历.java) |
+[golang版本](../../../codes/golang/94.二叉树的中序遍历.go) |
+[python版本](../../../codes/python/94.二叉树的中序遍历.py)
+
 </br>
 
 ## 96. 不同的二叉搜索树
