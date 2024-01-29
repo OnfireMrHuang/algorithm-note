@@ -30,6 +30,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
+**题目解法:** 根据题目要求，该题目可以使用前序遍历的方式来判断，当为根节点时我们假设其取值范围为[-∞, +∞]，当其左子树不为空时，其取值范围为[-∞, root.val]，当其右子树不为空时，其取值范围为[root.val, +∞]。通过该方式我们判断每个节点的值是否在其取值范围内即可。
+
+[rust版本](../../../codes/rust/98.验证二叉搜索树.rs) |
+[java版本](../../../codes/java/98.验证二叉搜索树.java) |
+[golang版本](../../../codes/golang/98.验证二叉搜索树.go) |
+[python版本](../../../codes/python/98.验证二叉搜索树.py)
+
 </br>
 
 ## 99. 恢复二叉搜索树
