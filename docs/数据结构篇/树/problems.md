@@ -69,6 +69,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
+**题目解法:** 该题目相对比较简单，只需要通过对比左右子树的深度，然后取最大值即可。(叶子节点的深度为1)
+
+[rust版本](../../../codes/rust/104.二叉树的最大深度.rs) |
+[java版本](../../../codes/java/104.二叉树的最大深度.java) |
+[golang版本](../../../codes/golang/104.二叉树的最大深度.go) |
+[python版本](../../../codes/python/104.二叉树的最大深度.py)
+
 </br>
 
 ## 105. 从前序与中序遍历序列构造二叉树
