@@ -82,6 +82,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 
+**题目解法:** xx
+
+[rust版本](../../../codes/rust/105.从前序与中序遍历序列构造二叉树.rs) |
+[java版本](../../../codes/java/105.从前序与中序遍历序列构造二叉树.java) |
+[golang版本](../../../codes/golang/105.从前序与中序遍历序列构造二叉树.go) |
+[python版本](../../../codes/python/105.从前序与中序遍历序列构造二叉树.py)
+
 </br>
 
 ## 112. 路径总和
