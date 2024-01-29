@@ -43,6 +43,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/recover-binary-search-tree/)
 
+**题目解法:** 改题目描述二叉树中恰好存在一对不符合的节点导致不能成为平衡二叉树，只要通过交换这两个节点就可以使其成为平衡二叉树。我们可以利用中序遍历的方式来遍历二叉树，因为二叉搜索树的中序遍历是有序的，通过中序遍历得到一个有序数组，然后找到其中不符合升序的两个节点，然后再二叉数中交换这两个节点值即可。
+
+[rust版本](../../../codes/rust/99.恢复二叉搜索树.rs) |
+[java版本](../../../codes/java/99.恢复二叉搜索树.java) |
+[golang版本](../../../codes/golang/99.恢复二叉搜索树.go) |
+[python版本](../../../codes/python/99.恢复二叉搜索树.py)
+
 </br>
 
 ## 102. 二叉树的层序遍历
@@ -50,7 +57,6 @@
 > [题目描述](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
 
 </br>
-
 
 ## 104. 二叉树的最大深度
 
