@@ -95,6 +95,13 @@
 
 > [题目描述](https://leetcode-cn.com/problems/path-sum/)
 
+**题目解法:** 该题目比较简单，我们只需要通过将目标值减去当前的节点值作为新的目标值，递归传递到左右子树，直到叶子节点，然后判断叶子节点的值是否等于目标值即可。
+
+[rust版本](../../../codes/rust/112.路径总和.rs) |
+[java版本](../../../codes/java/112.路径总和.java) |
+[golang版本](../../../codes/golang/112.路径总和.go) |
+[python版本](../../../codes/python/112.路径总和.py)
+
 </br>
 
 ## 113. 路径总和 II
