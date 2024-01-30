@@ -164,7 +164,7 @@
 
 > [题目描述](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 
-**题目解法:** todo
+**题目解法:** 因为是二叉搜索树, 节点p和q的最近公共祖先的值一定是在[p,q]范围内，所以我们可以递归遍历该二叉搜索树，如果当前节点的值比p和q的值大，那么往左子树走，如果当前节点的值比p和q的值小，那么往右子树走，如果当前节点的值刚好在[p,q]范围内，那么当前节点就是p和q的最近公共祖先。
 
 [rust版本](../../../codes/rust/235.二叉搜索树的最近公共祖先.rs) |
 [java版本](../../../codes/java/235.二叉搜索树的最近公共祖先.java) |
