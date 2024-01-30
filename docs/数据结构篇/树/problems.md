@@ -151,7 +151,7 @@
 
 > [题目描述](https://leetcode-cn.com/problems/invert-binary-tree/)
 
-**题目解法:** todo: 从这开始
+**题目解法:** 该题目直接使用递归的方式先翻转左右子树，然后再交换左右子树即可。
 
 [rust版本](../../../codes/rust/226.翻转二叉树.rs) |
 [java版本](../../../codes/java/226.翻转二叉树.java) |
