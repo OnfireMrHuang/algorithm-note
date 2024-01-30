@@ -179,18 +179,6 @@ $$
 
 </br>
 
-## 应用场景案例
-
-### 数据科学
-
-### 金融
-
-### 游戏
-
-### 教育
-
-</br>
-
 ## 参考资料
 
 1. [labuladong的算法小抄](https://github.com/labuladong/fucking-algorithm)
