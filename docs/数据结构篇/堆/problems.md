@@ -4,7 +4,7 @@
 
 > 题目描述: https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
 
-**题目解法**: todo
+**题目解法**: 该题目正好可以使用小根堆；我们可以维护一个k大小的小根堆，让插入一个数值导致堆满的时候就将堆顶元素删除(删除的是最小的元素)，那么当nums的所有元素都走过一遍后，堆顶元素就是第K大的元素。整体的时间复杂度是`O(nlogn)`.
 
 [rust版本](../../../codes/rust/215.数组中的第k个最大元素.rs) |
 [java版本](../../../codes/java/215.数组中的第k个最大元素.java) |

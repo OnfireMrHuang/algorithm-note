@@ -10,6 +10,7 @@ impl Solution {
         // 首先，针对整个nums做一次堆化
         let mut heap_size = nums.len();
         Self::build_max_heap(&mut nums, heap_size);
+        // 然后交换堆底和堆首，之后向下调整
         for i in (nums.len() - (k as usize) + 1..nums.len()).rev() {
             Self::swap(&mut nums, i, 0);
             heap_size -= 1;
@@ -19,11 +20,17 @@ impl Solution {
     }
     // 构建大顶堆
     fn build_max_heap(nums: &mut Vec<i32>, heap_size: usize) {
-        // 从非叶子结点开始堆化，一直堆化到根节点
+        // 在二叉堆中，数组的下标从0开始，对于任意一个节点i，
+        // 它的左子节点的下标为2i+1，右子节点的下标为2i+2。
+        // 而对于一个具有n个节点的完全二叉树，最后一个非叶子节点的下标为n/2向下取整-1。
+        // 因此，二叉堆的非叶子节点数量为n/2向下取整。
+        // 从最后一个非叶子节点开始，不断调整，直到根节点
         for i in (0..nums.len() / 2).rev() {
             Self::max_heap_heapify(nums, i, heap_size)
         }
     }
+
+    // 最大堆向下调整
     fn max_heap_heapify(nums: &mut Vec<i32>, i: usize, heap_size: usize) {
         let l = i * 2 + 1;
         let r = i * 2 + 2;
