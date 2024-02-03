@@ -17,7 +17,17 @@
 
 > 题目描述: https://leetcode-cn.com/problems/find-median-from-data-stream/
 
-**题目解法**: todo
+**题目解法**: 该题目计算数据流中的中位数，我们可以利用双堆技巧。即使用一个大根堆和一个小根堆，其中大根堆存储元素较小的一半元素(命名为left_heap)，小根堆存储元素较大的一半元素(命名为right_heap)，最后结果可以分别从两个堆的堆顶元素计算得出。整个过程如下:
+
+- MedianFinder类维护left_heap和right_heap
+- 当插入元素时，对比一下left_heap和right_heap的大小来保持平衡
+- 如果两个堆大小一致，即偶数: 那么就先往right_heap插入一个数据，然后再弹出right_heap的堆顶元素到left_heap,此时left_heap的堆顶元素就是中位数。
+- 如果两个堆大小不一致，即奇数: 那么就先往left_heap插入一个数据，然后再弹出left_heap的堆顶元素到right_heap,此时`(left_heap的堆顶元素 + right_heap的堆顶元素) / 2`就是中位数。
+- 当数据流写完，按照两个堆的大小和堆顶元素计算中位数即可。
+
+**整个过程中说明一下，为什么要先插入一个堆然后再弹出堆顶元素到另外一个堆？(我当时也有类似的疑惑)** 
+
+因为我们要保持left_heap的堆顶元素始终是中位数，所以我们要保证left_heap的堆顶元素始终是right_heap的堆顶元素的前一个元素，反之亦然。如果不这样做，而是谁少补谁的话，那么两个堆顶元素不能保证是连续的。
 
 [rust版本](../../../codes/rust/295.数据流的中位数.rs) |
 [java版本](../../../codes/java/295.数据流的中位数.java) |
