@@ -1,21 +1,13 @@
-
 import heapq
 
-class PriorityQueue:
-	def __init__(self):
-		self.heap = []
+class Cell:
+	def __init__(self,x,y,v) -> None:
+		self.x = x
+		self.y = y
+		self.h = v
 
-	def push(self, item):
-		heapq.heappush(self.heap, item)
-
-	def pop(self):
-		return heapq.heappop(self.heap)
-	
-	def is_empty(self):
-		return not self.heap
-    
 	def __lt__(self, other):
-		return self[2] < other[2]
+		return self.h < other.h
 
 class Solution:
 	def trapRainWater(self, heightMap: List[List[int]]) -> int:
@@ -23,27 +15,26 @@ class Solution:
 		n = len(heightMap[0])
 		if m <= 2 or n <= 2:
 			return 0
-		pq = PriorityQueue()
-		visit = [[False] * n for _ in range(m)]
+		pq = []
+		visit = [[False]*n for _ in range(m)]
 		for i in range(m):
 			for j in range(n):
-				if i == 0 or i == m - 1 or j == 0 or j == n - 1:
+				if i == 0 or i == m-1 or j == 0 or j == n-1:
 					visit[i][j] = True
-					pq.push((i, j, heightMap[i][j]))
+					heapq.heappush(pq, Cell(i, j, heightMap[i][j]))
 		result = 0
-		while not pq.is_empty():
-			x, y, v = pq.pop()
-			directions = [-1, 0, 1, 0, -1]
+		directions = [-1, 0, 1, 0, -1]
+		while pq:
+			cell = heapq.heappop(pq)
 			for i in range(4):
-				xx = x + directions[i]
-				yy = y + directions[i + 1]
-				if xx < 0 or xx >= m or yy < 0 or yy >= n or visit[xx][yy]:
+				x = cell.x + directions[i]
+				y = cell.y + directions[i+1]
+				if x < 0 or x >= m or y < 0 or y >= n or visit[x][y]:
 					continue
-				if v > heightMap[xx][yy]:
-					result += v - heightMap[xx][yy]
-					heightMap[xx][yy] = v
-				visit[xx][yy] = True
-				pq.push((xx, yy, heightMap[xx][yy]))
+				if cell.h > heightMap[x][y]:
+					result += cell.h - heightMap[x][y]
+					heightMap[x][y] = cell.h
+				visit[x][y] = True
+				heapq.heappush(pq, Cell(x, y, heightMap[x][y]))
 		return result
 		
-

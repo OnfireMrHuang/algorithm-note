@@ -48,14 +48,14 @@ func trapRainWater(heightMap [][]int) int {
 			visit[i][j] = false
 			if i == 0 || i == m-1 || j == 0 || j == n-1 {
 				visit[i][j] = true
-				pq.Push(Cell{i, j, heightMap[i][j]})
+				heap.Push(pq, Cell{i, j, heightMap[i][j]})
 			}
 		}
 	}
 	result := 0
 	directions := []int{-1, 0, 1, 0, -1}
 	for pq.Len() > 0 {
-		cell := pq.Pop().(Cell)
+		cell := heap.Pop(pq).(Cell)
 		for i := 0; i < 4; i++ {
 			x := cell.x + directions[i]
 			y := cell.y + directions[i+1]
@@ -67,7 +67,7 @@ func trapRainWater(heightMap [][]int) int {
 				heightMap[x][y] = cell.v
 			}
 			visit[x][y] = true
-			pq.Push(Cell{x, y, heightMap[x][y]})
+			heap.Push(pq, Cell{x, y, heightMap[x][y]})
 		}
 	}
 	return result
