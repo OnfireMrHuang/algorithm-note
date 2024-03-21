@@ -1,4 +1,4 @@
-# 图
+# 图论
 
 ## 图的简介
 
@@ -80,12 +80,22 @@
 
 ## 图的经典场景
 
-### 有向无环图(DAG)
+### 有向无环图(DAG)与拓扑排序
 
-有向无环图的性质是边有方向、无环.
+有向无环图的性质是边有方向、无环, 如下图所示:
 
-### 拓扑排序
+![有向无环图](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Tred-G.svg/175px-Tred-G.svg.png)
+
+> 有向无环图的拓扑排序 [➡️](https://xie.infoq.cn/article/3b478d3129b642af3fe497f58)
+
+### 最短路径
+
+图中两个顶点之间的最短路径指的是从一个顶点到另外一个顶点所经过的边的权重总和最小的路径。最短路径问题是图论中的一个经典问题，常见的解决方法有 Dijkstra 算法和 Floyd 算法。
+
+> Dijkstra算法 [➡️](https://www.freecodecamp.org/chinese/news/dijkstras-shortest-path-algorithm-visual-introduction/)
+
+> Floyd算法 [➡️](https://houbb.github.io/2020/01/23/data-struct-learn-03-graph-floyd)
 
 ### 最小生成树
 
-### 最短路径
+> 最小生成树算法 [➡️](https://zinglix.xyz/2017/09/06/mst/)
