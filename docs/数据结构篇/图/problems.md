@@ -46,22 +46,11 @@ tips: 我们可以在深度遍历过程中将遇到的陆地直接淹掉(置为0
 [golang版本](../../../codes/golang/210.课程表-ii.go) |
 [python版本](../../../codes/python/210.课程表-ii.py)
 
-## 685. 冗余连接 II
-
-> [题目描述](https://leetcode-cn.com/problems/redundant-connection-ii/)
-
-**题目解法:** todo
-
-[rust版本](../../../codes/rust/685.冗余连接-ii.rs) |
-[java版本](../../../codes/java/685.冗余连接-ii.java) |
-[golang版本](../../../codes/golang/685.冗余连接-ii.go) |
-[python版本](../../../codes/python/685.冗余连接-ii.py)
-
 ## 743. 网络延迟时间
 
 > [题目描述](https://leetcode-cn.com/problems/network-delay-time/)
 
-**题目解法:** todo
+**题目解法:** 该题目是一个有向图中求最短路径的问题，我们可以把延迟看作边的权重，最小延迟就是最小权重路径，于是我们可以使用Dijkstra算法来解决。
 
 [rust版本](../../../codes/rust/743.网络延迟时间.rs) |
 [java版本](../../../codes/java/743.网络延迟时间.java) |

@@ -93,7 +93,6 @@
 图中两个顶点之间的最短路径指的是从一个顶点到另外一个顶点所经过的边的权重总和最小的路径。最短路径问题是图论中的一个经典问题，常见的解决方法有 Dijkstra 算法和 Floyd 算法。
 
 > Dijkstra算法 [➡️](https://www.freecodecamp.org/chinese/news/dijkstras-shortest-path-algorithm-visual-introduction/)
-
 > Floyd算法 [➡️](https://houbb.github.io/2020/01/23/data-struct-learn-03-graph-floyd)
 
 ### 最小生成树
