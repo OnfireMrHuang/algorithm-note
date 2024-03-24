@@ -56,3 +56,14 @@ tips: 我们可以在深度遍历过程中将遇到的陆地直接淹掉(置为0
 [java版本](../../../codes/java/743.网络延迟时间.java) |
 [golang版本](../../../codes/golang/743.网络延迟时间.go) |
 [python版本](../../../codes/python/743.网络延迟时间.py)
+
+## 1584. 连接所有点的最小费用
+
+> [题目描述](https://leetcode-cn.com/problems/min-cost-to-connect-all-points/)
+
+**题目解法:** todo
+
+[rust版本](../../../codes/rust/1584.连接所有点的最小费用.rs) |
+[java版本](../../../codes/java/1584.连接所有点的最小费用.java) |
+[golang版本](../../../codes/golang/1584.连接所有点的最小费用.go) |
+[python版本](../../../codes/python/1584.连接所有点的最小费用.py)

@@ -135,14 +135,24 @@ $$
 
 ### 并查集
 
+- [并查集简要说明](./docs/数据结构篇/并查集/brief_introducation.md)
+- [题解](./docs/数据结构篇/并查集/problems.md)
+
 ### 字典树
 
+- [字典树简要说明](./docs/数据结构篇/字典树/brief_introduction.md)
+- [题解](./docs/数据结构篇/字典树/problems.md)
+
 ### 线段树
+
+- [线段树简要说明](./docs/数据结构篇/线段树/brief_introduction.md)
+- [题解](./docs/数据结构篇/线段树/problems.md)
 
 ### 图
 
 - [图简要说明](./docs/数据结构篇/图/brief_introduction.md)
-- [题解](./docs/数据结构篇/图/problems.md)
+- [题解](./docs/数据结构篇
+- /图/problems.md)
 
 </br>
 
@@ -186,3 +196,4 @@ $$
 2. [Hello算法](https://github.com/krahets/hello-algo)
 3. [算法导论](https://jingyuexing.github.io/Ebook/Algorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA.pdf)
 4. [OI-wiki](https://github.com/OI-wiki/OI-wiki)
+5. [算法通关手册](https://algo.itcharge.cn/)
