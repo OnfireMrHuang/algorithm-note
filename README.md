@@ -151,8 +151,7 @@ $$
 ### 图
 
 - [图简要说明](./docs/数据结构篇/图/brief_introduction.md)
-- [题解](./docs/数据结构篇
-- /图/problems.md)
+- [题解](./docs/数据结构篇/图/problems.md)
 
 </br>
 
