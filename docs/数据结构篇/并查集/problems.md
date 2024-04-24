@@ -65,6 +65,8 @@
 
 > [题目描述](https://leetcode-cn.com/problems/number-of-operations-to-make-network-connected/)
 
+**题目解法:** 该题目可以使用并查集算法来解决，一开始所有的计算机都是未连通的，通过遍历`connections`将未连通的计算机连通，如果其中一个`connection`在尝试连通前，其两端的计算机就已经是通了的那么就记录这次连接，最后与遍历完后还未连通的计算机数量进行对比，如果多余的连接数小于未连通的计算机数量，那么就无法将所有的计算机连通，返回-1，否则就返回未连通的计算机数量作为最少操作次数。
+
 [rust版本](../../../codes/rust/1319.连通网络的操作次数.rs) |
 [java版本](../../../codes/java/1319.连通网络的操作次数.java) |
 [golang版本](../../../codes/golang/1319.连通网络的操作次数.go) |
