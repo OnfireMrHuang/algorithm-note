@@ -112,11 +112,110 @@ class SegmentTree:
 1. 如果当前节点的区间[left, right]与查询区间[q_left, q_right]没有交集，则返回一个不影响结果的值，比如0或者-inf。
 2. 如果当前节点的区间[left, right]完全在查询区间[q_left, q_right]中，即left > q_left && right < q_right，则返回当前节点的值。
 3. 如果当前节点的区间于查询区间构成交集，则:
-   1. 
+   1. 判断查询区间[q_left, q_right]是否与节点左子树区间[left, mid]有交集(即q_left < mid)，如果有，则递归查询左子树并保存结果为left_res。
+   2. 判断查询区间[q_left, q_right]是否与节点右子树区间[mid+1, right]有交集(即q_right > mid)，如果有，则递归查询右子树并保存结果为right_res。
+   3. 最后返回left_res和right_res的聚合结果。
 
+代码如下:
+
+```python
+    # 区间查询，查询区间为 [q_left, q_right] 的区间值
+    def query_interval(self, q_left, q_right):
+        return self.__query_interval(q_left, q_right, 0, 0, self.size - 1)
+    
+    # 区间查询，在线段树的 [left, right] 区间范围中搜索区间为 [q_left, q_right] 的区间值
+    def __query_interval(self, q_left, q_right, index, left, right):
+        if left >= q_left and right <= q_right:     # 节点所在区间被 [q_left, q_right] 所覆盖
+            return self.tree[index].val             # 直接返回节点值
+        if right < q_left or left > q_right:        # 节点所在区间与 [q_left, q_right] 无关
+            return 0
+    
+        self.__pushdown(index)
+    
+        mid = left + (right - left) // 2            # 左右节点划分点
+        left_index = index * 2 + 1                  # 左子节点的存储下标
+        right_index = index * 2 + 2                 # 右子节点的存储下标
+        res_left = 0                                # 左子树查询结果
+        res_right = 0                               # 右子树查询结果
+        if q_left <= mid:                           # 在左子树中查询
+            res_left = self.__query_interval(q_left, q_right, left_index, left, mid)
+        if q_right > mid:                           # 在右子树中查询
+            res_right = self.__query_interval(q_left, q_right, right_index, mid + 1, right)
+        return self.function(res_left, res_right)   # 返回左右子树元素值的聚合计算结果
+```
 
 ### 区间更新
 
-## 线段树的应用
+**对查询区间[q_left, q_right]进行更新，比如将该区间内所有元素都更新为val**
 
+**1、延迟标记:**
 
+在进行【区间更新】操作中，如果某个节点区间[left, right]被修改区间[q_left, q_right]完全覆盖，那么以该节点为根的整颗子树所有节点的区间值都要发生变化，这样使得一次区间更新操作的时间复杂度增加到O(n).
+
+为了解决这个问题，我们可以引入【延迟标记】的概念，即在节点中维护一个lazy_tag，表示【该节点区间曾经被修改为val,但其子节点区间值尚未更新】。也就是说除了在进行区间更新时，将区间子节点的更新操作延迟到【在后续操作中递归进入子节点时】再执行。这样一来，每次区间更新和区间查询的时间复杂度都是O(logn)。其区间更新步骤如下:
+
+1. 如果区间[q_left, q_right]完全覆盖当前节点区间[left, right]，即q_left <= left && q_right >= right，则更新当前节点的lazy_tag为val，并将当前节点的延迟标记为区间值。
+2. 如果区间[q_left, q_right]与当前节点区间[left, right]没有交集，则直接返回。
+3. 如果区间[q_left, q_right]与当前节点区间[left, right]有交集，则:
+   1. 如果当前节点的lazy_tag不为空，则将当前节点的lazy_tag更新到左右子节点(即向下更新)。
+   2. 如果区间[q_left, q_right]与当前节点左子节点区间[left, mid]有交集(即q_left <= mid)，则递归更新左子树。
+   3. 如果区间[q_left, q_right]与当前节点右子节点区间[mid+1, right]有交集(即q_right > mid)，则递归更新右子树。
+   4. 左右子树更新返回之后，向上更新节点的区间值（区间和、区间最大值、区间最小值等），区间值等于该节点左右子节点元素值的聚合计算结果。
+
+**2、向下更新:**
+
+延迟标记更新区间的具体步骤为:
+
+1. 更新左子节点值和左子节点的lazy_tag为val.
+2. 更新右子节点值和右子节点的lazy_tag为val.
+3. 更新当前节点的lazy_tag为None.
+
+其实现代码如下:
+
+```python
+    # 区间更新，将区间为 [q_left, q_right] 上的元素值修改为 val
+    def update_interval(self, q_left, q_right, val):
+        self.__update_interval(q_left, q_right, val, 0, 0, self.size - 1)
+        
+    # 区间更新
+    def __update_interval(self, q_left, q_right, val, index, left, right):
+        
+        if left >= q_left and right <= q_right:     # 节点所在区间被 [q_left, q_right] 所覆盖
+            interval_size = (right - left + 1)      # 当前节点所在区间大小
+            self.tree[index].val = interval_size * val # 当前节点所在区间每个元素值改为 val
+            self.tree[index].lazy_tag = val         # 将当前节点的延迟标记为区间值
+            return
+        if right < q_left or left > q_right:        # 节点所在区间与 [q_left, q_right] 无关
+            return 0
+    
+        self.__pushdown(index)
+    
+        mid = left + (right - left) // 2            # 左右节点划分点
+        left_index = index * 2 + 1                  # 左子节点的存储下标
+        right_index = index * 2 + 2                 # 右子节点的存储下标
+        if q_left <= mid:                           # 在左子树中更新区间值
+            self.__update_interval(q_left, q_right, val, left_index, left, mid)
+        if q_right > mid:                           # 在右子树中更新区间值
+            self.__update_interval(q_left, q_right, val, right_index, mid + 1, right)
+        
+        self.__pushup(index)
+    
+    # 向下更新下标为 index 的节点所在区间的左右子节点的值和懒惰标记
+    def __pushdown(self, index):
+        lazy_tag = self.tree[index].lazy_tag
+        if not lazy_tag:
+            return
+        
+        left_index = index * 2 + 1                  # 左子节点的存储下标
+        right_index = index * 2 + 2                 # 右子节点的存储下标
+        
+        self.tree[left_index].lazy_tag = lazy_tag   # 更新左子节点懒惰标记
+        left_size = (self.tree[left_index].right - self.tree[left_index].left + 1)
+        self.tree[left_index].val = lazy_tag * left_size    # 更新左子节点值
+
+        self.tree[right_index].lazy_tag = lazy_tag  # 更新右子节点懒惰标记
+        right_size = (self.tree[right_index].right - self.tree[right_index].left + 1)
+        self.tree[right_index].val = lazy_tag * right_size  # 更新右子节点值
+
+        self.tree[index].lazy_tag = None            # 更新当前节点的懒惰标记
+```
