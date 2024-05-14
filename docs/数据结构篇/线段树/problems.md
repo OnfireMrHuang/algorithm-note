@@ -11,7 +11,6 @@
 [golang版本](../../../codes/golang/307.区域和检索-数组可修改.go) |
 [python版本](../../../codes/python/307.区域和检索-数组可修改.py)
 
-
 ## 729. 我的日程安排表 I
 
 > [题目描述](https://leetcode-cn.com/problems/my-calendar-i/)

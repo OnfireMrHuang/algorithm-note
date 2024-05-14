@@ -24,13 +24,13 @@
 [golang版本](../../../codes/golang/212.单词搜索-ii.go) |
 [python版本](../../../codes/python/212.单词搜索-ii.py)
 
-## 692. 前K个高频单词
+## 648. 单词替换
 
-> [题目描述](https://leetcode-cn.com/problems/top-k-frequent-words/)
+> [题目描述](https://leetcode-cn.com/problems/replace-words/)
 
 **题目解法:** TODO
 
-[rust版本](../../../codes/rust/692.前k个高频单词.rs) |
-[java版本](../../../codes/java/692.前k个高频单词.java) |
-[golang版本](../../../codes/golang/692.前k个高频单词.go) |
-[python版本](../../../codes/python/692.前k个高频单词.py)
+[rust版本](../../../codes/rust/648.单词替换.rs) |
+[java版本](../../../codes/java/648.单词替换.java) |
+[golang版本](../../../codes/golang/648.单词替换.go) |
+[python版本](../../../codes/python/648.单词替换.py)
