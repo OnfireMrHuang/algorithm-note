@@ -4,7 +4,7 @@
 
 > [题目描述](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)
 
-**题目解法:** TODO
+**题目解法:** 该题目是一个典型的实现字典树，字典树的定义我们已经在简要说明中提到，这里我们只需要实现字典树的插入、字符串查找、字符串前缀查找即可.
 
 [rust版本](../../../codes/rust/208.实现-trie-前缀树.rs) |
 [java版本](../../../codes/java/208.实现-trie-前缀树.java) |
