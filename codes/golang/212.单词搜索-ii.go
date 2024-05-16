@@ -58,5 +58,6 @@ func searchWord(board [][]byte, visited [][]bool, word string, index, x, y int) 
 	}
 	return false
 }
+
 // @lc code=end
 
