@@ -4,7 +4,7 @@
 
 > [题目描述](https://leetcode-cn.com/problems/range-sum-query-mutable/)
 
-**题目解法:** todo
+**题目解法:** 该题是典型的线段树解法，可参考简要说明中的线段树操作一节。
 
 [rust版本](../../../codes/rust/307.区域和检索-数组可修改.rs) |
 [java版本](../../../codes/java/307.区域和检索-数组可修改.java) |
