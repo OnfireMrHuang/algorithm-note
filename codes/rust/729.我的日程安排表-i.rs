@@ -8,6 +8,7 @@
 use std::collections::BTreeSet;
 struct MyCalendar {
     // 存储日程的有序集合, 其中0为日程开始时间, 1为日程结束时间
+    // 元组的比较会按照第一个元素的大小进行比较、如果第一个元素相等则比较第二个元素、以此类推...
     booked: BTreeSet<(i32, i32)>,
 }
 
@@ -28,19 +29,21 @@ impl MyCalendar {
             self.booked.insert((start, end));
             return true;
         }
-        // 获取第一个大于等于start的日程
+        // 往右找比预定区间大的区间
         if let Some(nxt_rng) = self.booked.range((start, end)..).next() {
-            // 如果该日程的开始时间小于end, 则表示该日程与新日程有重叠, 返回false
+            // 如果该区间的开始时间比预定时间要小，说明重叠了，则直接返回false
             if nxt_rng.0 < end {
                 return false;
             }
         }
+        // 往左找比预定区间小的区间
         if let Some(prev_rng) = self.booked.range(..(start, end)).last() {
-            // 如果该日程的结束时间大于start, 则表示该日程与新日程有重叠, 返回false
+            // 如果该区间的结束时间比预定时间要大，说明重叠了，则直接返回false
             if prev_rng.1 > start {
                 return false;
             }
         }
+        // 没有重叠则插入
         self.booked.insert((start, end));
         true
     }
