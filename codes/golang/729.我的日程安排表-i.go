@@ -20,20 +20,20 @@ func Constructor() MyCalendar {
 }
 
 func (this *MyCalendar) Book(start int, end int) bool {
-	return this.book(this.root, start, end)
+	return book(this.root, start, end)
 }
 
-func (this *MyCalendar) book(root *SegmentTreeNode, start int, end int) bool {
+func book(root *SegmentTreeNode, start int, end int) bool {
 	// 如果节点区间与预定区间无交集, 则直接返回
-	if this.withoutBookRange(root, start, end) {
+	if withoutBookRange(root, start, end) {
 		return false
 	}
 	// 如果节点区间完全在预定区间内
-	if this.withInBookRange(root, start, end) {
+	if withInBookRange(root, start, end) {
 		var ans bool
 		switch root.BookedStatus {
 		case 0:
-			this.BookedStatus = 1 // 设置为全部被预定
+			root.BookedStatus = 1 // 设置为全部被预定
 			ans = true
 		default:
 			// 存在冲突，返回预定失败
@@ -43,16 +43,16 @@ func (this *MyCalendar) book(root *SegmentTreeNode, start int, end int) bool {
 	}
 	// 预定区间存在交集
 	var mid = root.Left + (root.Right-root.Left)/2
-	constructChild(root.LeftChild, left, mid)   // 构造左子树
-	constructChild(root.RightChild, mid, right) // 构造右子树
+	constructChild(root.LeftChild, root.Left, mid)   // 构造左子树
+	constructChild(root.RightChild, mid, root.Right) // 构造右子树
 	var bookAns = true
 	if start < mid {
-		if !this.book(root.LeftChild, start, end) {
+		if !book(root.LeftChild, start, end) {
 			bookAns = false
 		}
 	}
 	if end >= mid {
-		if !this.book(root.RightChild, start, end) {
+		if !book(root.RightChild, start, end) {
 			bookAns = false
 		}
 	}
@@ -67,14 +67,14 @@ func (this *MyCalendar) book(root *SegmentTreeNode, start int, end int) bool {
 	return bookAns
 }
 
-func (this *MyCalendar) withInBookRange(node *SegmentTreeNode, start int, end int) bool {
+func withInBookRange(node *SegmentTreeNode, start int, end int) bool {
 	if node.Left >= start && node.Right <= end {
 		return true
 	}
 	return false
 }
 
-func (this *MyCalendar) withoutBookRange(node *SegmentTreeNode, start int, end int) bool {
+func withoutBookRange(node *SegmentTreeNode, start int, end int) bool {
 	if node.Left >= end || node.Right < start {
 		return true
 	}
