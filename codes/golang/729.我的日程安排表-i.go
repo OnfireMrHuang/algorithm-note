@@ -1,46 +1,92 @@
-// Go语言中没有内置的BTree数据结构，这里需要手写一个线段树定义
-
-type RangeNode struct {
-	Start: int,
-	End: int
-	Left: *RangeTree,
-	Right: *RangeTree,
+type SegmentTreeNode struct {
+	Left         int              // 左区间值
+	Right        int              // 右区间值
+	BookedStatus int              // 0: 区间未被预定， 1: 区间全部被预定， 2: 区间部分被预定
+	LeftChild    *SegmentTreeNode // 左子节点
+	RightChild   *SegmentTreeNode // 右子节点
 }
-
-func NewRangeNode(start,end int) *RangeNode {
-	return &RangeNode{
-		Start: start,
-		End: end,
-	}
-}
-
-func 
-
 
 type MyCalendar struct {
-	root *RangeTree
+	root *SegmentTreeNode // 根节点
 }
 
 func Constructor() MyCalendar {
-	return MyCalendar{}
+	// 初始化一个
+	var r = &SegmentTreeNode{
+		Left:  0,
+		Right: 1000000000,
+	}
+	return MyCalendar{root: r}
 }
 
 func (this *MyCalendar) Book(start int, end int) bool {
-	if this.root == nil {
-		this.root = NewRangeNode(start, end)
+	return this.book(this.root, start, end)
+}
+
+func (this *MyCalendar) book(root *SegmentTreeNode, start int, end int) bool {
+	// 如果节点区间与预定区间无交集, 则直接返回
+	if this.withoutBookRange(root, start, end) {
+		return false
+	}
+	// 如果节点区间完全在预定区间内
+	if this.withInBookRange(root, start, end) {
+		var ans bool
+		switch root.BookedStatus {
+		case 0:
+			this.BookedStatus = 1 // 设置为全部被预定
+			ans = true
+		default:
+			// 存在冲突，返回预定失败
+			ans = false
+		}
+		return ans
+	}
+	// 预定区间存在交集
+	var mid = root.Left + (root.Right-root.Left)/2
+	constructChild(root.LeftChild, left, mid)   // 构造左子树
+	constructChild(root.RightChild, mid, right) // 构造右子树
+	var bookAns = true
+	if start < mid {
+		if !this.book(root.LeftChild, start, end) {
+			bookAns = false
+		}
+	}
+	if end >= mid {
+		if !this.book(root.RightChild, start, end) {
+			bookAns = false
+		}
+	}
+	// 根据左右子树的预定状态更新当前节点的预定状态
+	if root.LeftChild.BookedStatus == 0 && root.RightChild.BookedStatus == 0 {
+		root.BookedStatus = 0
+	} else if root.LeftChild.BookedStatus == 1 && root.RightChild.BookedStatus == 1 {
+		root.BookedStatus = 1
+	} else {
+		root.BookedStatus = 2
+	}
+	return bookAns
+}
+
+func (this *MyCalendar) withInBookRange(node *SegmentTreeNode, start int, end int) bool {
+	if node.Left >= start && node.Right <= end {
 		return true
 	}
-	// 首先与根节点对比，如果不在根节点范围内
-
-
+	return false
 }
 
-func (this *MyCalendar) book(node *RangeNode,start int, end int) {
-
+func (this *MyCalendar) withoutBookRange(node *SegmentTreeNode, start int, end int) bool {
+	if node.Left >= end || node.Right < start {
+		return true
+	}
+	return false
 }
 
-/**
- * Your MyCalendar object will be instantiated and called as such:
- * obj := Constructor();
- * param_1 := obj.Book(start,end);
- */
+func constructChild(child *SegmentTreeNode, left, right int) *SegmentTreeNode {
+	if child != nil {
+		return child
+	}
+	return &SegmentTreeNode{
+		Left:  left,
+		Right: right,
+	}
+}
