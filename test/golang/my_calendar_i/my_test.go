@@ -139,7 +139,7 @@ func constructChild(child *SegmentTreeNode, left, right int) *SegmentTreeNode {
 	}
 }
 
-func TestMyCalendar(t *testing.T) {
+func TestMyCalendar1(t *testing.T) {
 	var obj = Constructor()
 	var ans bool
 	ans = obj.Book(10, 20)
@@ -148,4 +148,29 @@ func TestMyCalendar(t *testing.T) {
 	assert.Equal(t, false, ans)
 	ans = obj.Book(20, 30)
 	assert.Equal(t, true, ans)
+}
+
+func TestMyCalendar2(t *testing.T) {
+	var obj = Constructor()
+	var ans bool
+	ans = obj.Book(47, 50)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(33, 41)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(39, 45)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(33, 42)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(25, 32)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(26, 35)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(19, 25)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(3, 8)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(8, 13)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(18, 27)
+	assert.Equal(t, false, ans)
 }
