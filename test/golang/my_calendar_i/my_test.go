@@ -60,7 +60,7 @@ func book(root *SegmentTreeNode, start int, end int) bool {
 	root.RightChild = constructChild(root.RightChild, mid, root.Right) // 构造右子树， 注意左闭右开区间
 	var bookAns = true
 	// 如果和左区间有交集，则递归判断一下左区间
-	if start <= mid {
+	if start < mid {
 		if !book(root.LeftChild, start, end) {
 			bookAns = false
 		}
