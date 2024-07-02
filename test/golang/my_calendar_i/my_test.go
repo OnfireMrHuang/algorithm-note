@@ -28,7 +28,13 @@ func Constructor() MyCalendar {
 }
 
 func (this *MyCalendar) Book(start int, end int) bool {
-	return book(this.root, start, end)
+	var ok = book(this.root, start, end)
+	if !ok {
+		return false
+	}
+	// 如果确定能预定，则再将内部相关的线段状态更改
+	pushDownStatus(this.root, start, end)
+	return true
 }
 
 // 节点区间与预定区间都是左闭右开区间
@@ -46,7 +52,6 @@ func book(root *SegmentTreeNode, start int, end int) bool {
 		var ans bool
 		switch root.BookedStatus {
 		case 0:
-			root.BookedStatus = 1 // 设置为全部被预定
 			ans = true
 		default:
 			// 存在冲突，返回预定失败
@@ -71,6 +76,32 @@ func book(root *SegmentTreeNode, start int, end int) bool {
 			bookAns = false
 		}
 	}
+	return bookAns
+}
+
+// 下推状态
+func pushDownStatus(root *SegmentTreeNode, start int, end int) {
+	// 到了不可再分则直接返回
+	if root.Left == root.Right-1 {
+		return
+	}
+	// 无关的区间直接返回
+	if withoutBookRange(root, start, end) {
+		return
+	}
+	// 如果节点区间完全在预定区间内
+	if withInBookRange(root, start, end) {
+		root.BookedStatus = 1 // 完全被预定
+		return
+	}
+	// 预定区间存在交集
+	var mid = root.Left + (root.Right-root.Left)/2
+	if start < mid {
+		pushDownStatus(root.LeftChild, start, end)
+	}
+	if end > mid {
+		pushDownStatus(root.RightChild, start, end)
+	}
 	// 根据左右子树的预定状态更新当前节点的预定状态
 	if root.LeftChild.BookedStatus == 0 && root.RightChild.BookedStatus == 0 {
 		root.BookedStatus = 0
@@ -79,7 +110,7 @@ func book(root *SegmentTreeNode, start int, end int) bool {
 	} else {
 		root.BookedStatus = 2
 	}
-	return bookAns
+	return
 }
 
 // 节点区间与预定区间都是左闭右开区间
