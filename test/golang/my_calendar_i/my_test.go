@@ -31,10 +31,11 @@ func (this *MyCalendar) Book(start int, end int) bool {
 	return book(this.root, start, end)
 }
 
+// 节点区间与预定区间都是左闭右开区间
 func book(root *SegmentTreeNode, start int, end int) bool {
-	// 如果已经切到叶子节点
-	if root.Left == root.Right {
-		return root.Left >= start && root.Right < end
+	// 因为这里节点值是左闭右开区间[a,b),所以针对[1,2)这种区间，只需要判断左值即可
+	if root.Left == root.Right-1 {
+		return root.Left >= start && root.Left < end
 	}
 	// 如果节点区间与预定区间无交集, 则直接返回
 	if withoutBookRange(root, start, end) {
@@ -55,17 +56,17 @@ func book(root *SegmentTreeNode, start int, end int) bool {
 	}
 	// 预定区间存在交集
 	var mid = root.Left + (root.Right-root.Left)/2
-	root.LeftChild = constructChild(root.LeftChild, root.Left, mid)    // 构造左子树
-	root.RightChild = constructChild(root.RightChild, mid, root.Right) // 构造右子树
+	root.LeftChild = constructChild(root.LeftChild, root.Left, mid)    // 构造左子树， 注意左闭右开区间
+	root.RightChild = constructChild(root.RightChild, mid, root.Right) // 构造右子树， 注意左闭右开区间
 	var bookAns = true
 	// 如果和左区间有交集，则递归判断一下左区间
-	if start < mid {
+	if start <= mid {
 		if !book(root.LeftChild, start, end) {
 			bookAns = false
 		}
 	}
 	// 如果和右区间有交集，则递归判断一下右区间
-	if end >= mid {
+	if end > mid {
 		if !book(root.RightChild, start, end) {
 			bookAns = false
 		}
@@ -81,15 +82,17 @@ func book(root *SegmentTreeNode, start int, end int) bool {
 	return bookAns
 }
 
+// 节点区间与预定区间都是左闭右开区间
 func withInBookRange(node *SegmentTreeNode, start int, end int) bool {
-	if node.Left >= start && node.Right <= end {
+	if node.Left >= start && node.Right < end {
 		return true
 	}
 	return false
 }
 
+// 节点区间与预定区间都是左闭右开区间
 func withoutBookRange(node *SegmentTreeNode, start int, end int) bool {
-	if node.Left > end || node.Right < start {
+	if node.Left >= end || node.Right <= start {
 		return true
 	}
 	return false
