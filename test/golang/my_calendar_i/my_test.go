@@ -41,7 +41,11 @@ func (this *MyCalendar) Book(start int, end int) bool {
 func book(root *SegmentTreeNode, start int, end int) bool {
 	// 因为这里节点值是左闭右开区间[a,b),所以针对[1,2)这种区间，只需要判断左值即可
 	if root.Left == root.Right-1 {
-		return root.Left >= start && root.Left < end
+		if root.Left >= start && root.Left < end && root.BookedStatus == 0 {
+			return true
+		} else {
+			return false
+		}
 	}
 	// 如果节点区间与预定区间无交集, 则直接返回
 	if withoutBookRange(root, start, end) {
@@ -81,21 +85,21 @@ func book(root *SegmentTreeNode, start int, end int) bool {
 
 // 下推状态
 func pushDownStatus(root *SegmentTreeNode, start int, end int) {
-	// 到了不可再分则直接返回
+	// 一直推送到叶子节点
 	if root.Left == root.Right-1 {
+		if root.Left >= start && root.Left < end {
+			root.BookedStatus = 1
+		}
 		return
 	}
 	// 无关的区间直接返回
 	if withoutBookRange(root, start, end) {
 		return
 	}
-	// 如果节点区间完全在预定区间内
-	if withInBookRange(root, start, end) {
-		root.BookedStatus = 1 // 完全被预定
-		return
-	}
 	// 预定区间存在交集
 	var mid = root.Left + (root.Right-root.Left)/2
+	root.LeftChild = constructChild(root.LeftChild, root.Left, mid)    // 构造左子树， 注意左闭右开区间
+	root.RightChild = constructChild(root.RightChild, mid, root.Right) // 构造右子树， 注意左闭右开区间
 	if start < mid {
 		pushDownStatus(root.LeftChild, start, end)
 	}
@@ -172,5 +176,70 @@ func TestMyCalendar2(t *testing.T) {
 	ans = obj.Book(8, 13)
 	assert.Equal(t, true, ans)
 	ans = obj.Book(18, 27)
+	assert.Equal(t, false, ans)
+}
+
+func TestMyCalendar3(t *testing.T) {
+	var obj = Constructor()
+	var ans bool
+	ans = obj.Book(20, 29)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(13, 22)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(44, 50)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(1, 7)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(2, 10)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(14, 20)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(19, 25)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(36, 42)
+	assert.Equal(t, true, ans)
+	ans = obj.Book(45, 50)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(47, 50)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(39, 45)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(44, 50)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(16, 25)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(45, 50)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(45, 50)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(12, 20)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(21, 29)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(11, 20)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(12, 17)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(34, 40)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(10, 18)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(38, 44)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(23, 32)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(38, 44)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(15, 20)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(27, 33)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(34, 42)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(44, 50)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(35, 40)
+	assert.Equal(t, false, ans)
+	ans = obj.Book(24, 31)
 	assert.Equal(t, false, ans)
 }

@@ -1,4 +1,5 @@
 
+
 type SegmentTreeNode struct {
 	Left         int              // 左区间值
 	Right        int              // 右区间值
@@ -34,7 +35,11 @@ func (this *MyCalendar) Book(start int, end int) bool {
 func book(root *SegmentTreeNode, start int, end int) bool {
 	// 因为这里节点值是左闭右开区间[a,b),所以针对[1,2)这种区间，只需要判断左值即可
 	if root.Left == root.Right-1 {
-		return root.Left >= start && root.Left < end
+		if root.Left >= start && root.Left < end && root.BookedStatus == 0 {
+			return true
+		} else {
+			return false
+		}
 	}
 	// 如果节点区间与预定区间无交集, 则直接返回
 	if withoutBookRange(root, start, end) {
@@ -74,21 +79,21 @@ func book(root *SegmentTreeNode, start int, end int) bool {
 
 // 下推状态
 func pushDownStatus(root *SegmentTreeNode, start int, end int) {
-	// 到了不可再分则直接返回
+	// 一直推送到叶子节点
 	if root.Left == root.Right-1 {
+		if root.Left >= start && root.Left < end {
+			root.BookedStatus = 1
+		}
 		return
 	}
 	// 无关的区间直接返回
 	if withoutBookRange(root, start, end) {
 		return
 	}
-	// 如果节点区间完全在预定区间内
-	if withInBookRange(root, start, end) {
-		root.BookedStatus = 1 // 完全被预定
-		return
-	}
 	// 预定区间存在交集
 	var mid = root.Left + (root.Right-root.Left)/2
+	root.LeftChild = constructChild(root.LeftChild, root.Left, mid)    // 构造左子树， 注意左闭右开区间
+	root.RightChild = constructChild(root.RightChild, mid, root.Right) // 构造右子树， 注意左闭右开区间
 	if start < mid {
 		pushDownStatus(root.LeftChild, start, end)
 	}
