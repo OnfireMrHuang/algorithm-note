@@ -174,6 +174,9 @@ $$
 
 ### 分治
 
+- [分治简要说明](./docs/算法篇/分治/brief_introduction.md)
+- [题解](./docs/算法篇/分治/problems.md)
+
 ### 排序
 
 - [排序简要说明](./docs/算法篇/排序/brief_introduction.md)
@@ -181,11 +184,23 @@ $$
 
 ### 搜索
 
+- [排序简要说明](./docs/算法篇/搜索/brief_introduction.md)
+- [题解](./docs/算法篇/搜索/problems.md)
+
 ### 贪心
+
+- [排序简要说明](./docs/算法篇/贪心/brief_introduction.md)
+- [题解](./docs/算法篇/贪心/problems.md)
 
 ### 回溯
 
+- [排序简要说明](./docs/算法篇/回溯/brief_introduction.md)
+- [题解](./docs/算法篇/回溯/problems.md)
+
 ### 动态规划
+
+- [排序简要说明](./docs/算法篇/动态规划/brief_introduction.md)
+- [题解](./docs/算法篇/动态规划/problems.md)
 
 </br>
 
